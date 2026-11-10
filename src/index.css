@@ -1,0 +1,376 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('./assets/fonts/outfit.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('./assets/fonts/work-sans.woff2') format('woff2');
+}
+
+@theme {
+  --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Work Sans', ui-sans-serif, system-ui, sans-serif;
+
+  --color-oat: #fbf6ee;
+  --color-paper: #f3eadc;
+  --color-cream: #fffdf8;
+  --color-ink: #221f1a;
+  --color-ink-soft: #3b352c;
+  --color-muted: #6f6559;
+  --color-line: #e9dfd2;
+  --color-peach: #f3c8a0;
+  --color-peach-soft: #fbe8d5;
+  --color-peach-ink: #a65f2a;
+  --color-sage: #a9c6a1;
+  --color-sage-soft: #e7f0e3;
+  --color-sage-ink: #4d7350;
+  --color-sky: #b6d1e5;
+  --color-sky-soft: #e6f0f7;
+  --color-sky-ink: #3f6b86;
+  --color-butter: #f2d78a;
+  --color-butter-soft: #fbf0cb;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-oat font-body text-ink antialiased;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-peach);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+.container-page {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .container-page {
+    padding-inline: 2rem;
+  }
+}
+
+/* ---------- Hero atmosphere ---------- */
+
+.dot-grid {
+  background-image: radial-gradient(rgba(34, 31, 26, 0.12) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 70% 60% at 60% 35%, black, transparent 72%);
+}
+
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.6;
+  animation: drift 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+.blob-delay {
+  animation-delay: -7s;
+  animation-duration: 24s;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(14px, -18px, 0) scale(1.06);
+  }
+}
+
+.float-slow {
+  animation: float 7s ease-in-out infinite;
+}
+
+.float-slow-delayed {
+  animation: float 8s ease-in-out -3s infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* ---------- Entrance + scroll reveal ---------- */
+
+.rise {
+  animation: rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Phone mockups ---------- */
+
+.phone-shell {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  margin-inline: auto;
+  padding: 9px;
+  border-radius: 46px;
+  background: linear-gradient(150deg, #37332c, #171512 45%, #2b2721);
+  box-shadow:
+    0 30px 70px -30px rgba(34, 31, 26, 0.55),
+    0 2px 0 rgba(255, 255, 255, 0.22) inset,
+    0 -2px 0 rgba(0, 0, 0, 0.4) inset;
+}
+
+.phone-screen {
+  position: relative;
+  overflow: hidden;
+  border-radius: 38px;
+  background: var(--color-cream);
+  isolation: isolate;
+}
+
+.phone-camera {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  z-index: 20;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #171512;
+  transform: translateX(-50%);
+}
+
+.phone-side {
+  position: absolute;
+  width: 3px;
+  border-radius: 9999px;
+  background: #3a352d;
+}
+
+.phone-side-left {
+  left: -3px;
+  top: 108px;
+  height: 44px;
+}
+
+.phone-side-right {
+  right: -3px;
+  top: 132px;
+  height: 66px;
+}
+
+/* ---------- Voice mockup ---------- */
+
+.voice-cloud {
+  width: 220px;
+  height: 220px;
+  border-radius: 9999px;
+  background:
+    radial-gradient(
+      42% 42% at 35% 32%,
+      rgba(120, 128, 255, 0.95) 0%,
+      rgba(120, 128, 255, 0.45) 55%,
+      transparent 72%
+    ),
+    radial-gradient(
+      38% 38% at 66% 35%,
+      rgba(149, 171, 230, 0.95) 0%,
+      rgba(149, 171, 230, 0.4) 55%,
+      transparent 72%
+    ),
+    radial-gradient(
+      40% 40% at 40% 66%,
+      rgba(252, 231, 207, 0.98) 0%,
+      rgba(252, 231, 207, 0.6) 55%,
+      transparent 74%
+    ),
+    radial-gradient(
+      46% 46% at 38% 42%,
+      rgba(30, 77, 246, 0.85) 0%,
+      rgba(30, 77, 246, 0.35) 55%,
+      transparent 74%
+    );
+  filter: blur(5px);
+  animation: voice-breathe 1.7s ease-in-out infinite alternate;
+}
+
+@keyframes voice-breathe {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+/* ---------- Privacy pocket ---------- */
+
+.pocket-back {
+  position: absolute;
+  inset: 34px 3% 16px;
+  border-radius: 36px;
+  background: #e2cdb0;
+  transform: rotate(-2.5deg);
+  box-shadow: 0 28px 50px -35px rgba(80, 58, 35, 0.55);
+}
+
+.pocket-note {
+  position: absolute;
+  z-index: 2;
+  top: 20px;
+  left: 8%;
+  right: 8%;
+  height: 76%;
+  overflow: hidden;
+  border: 1px solid rgba(110, 90, 65, 0.14);
+  border-radius: 22px;
+  background: var(--color-cream);
+  transform: rotate(-1deg);
+  box-shadow: 0 22px 38px -26px rgba(80, 58, 35, 0.45);
+}
+
+.pocket-front {
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 44%;
+  border-radius: 0 0 38px 38px;
+  background: #ecd9c0;
+  box-shadow: 0 -20px 40px -32px rgba(80, 58, 35, 0.5);
+}
+
+.pocket-front::before {
+  content: '';
+  position: absolute;
+  top: -18px;
+  right: 0;
+  left: 0;
+  height: 36px;
+  border-radius: 50%;
+  background: #ecd9c0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.pocket-stitch {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  left: 24px;
+  border-top: 1.5px dashed rgba(112, 86, 57, 0.28);
+}
+
+/* ---------- Details ---------- */
+
+.menu-in {
+  animation: menu-in 180ms ease-out both;
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.link-underline {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(34, 31, 26, 0.3);
+  transition: text-decoration-color 180ms ease;
+}
+
+.link-underline:hover {
+  text-decoration-color: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .blob {
+    animation: none;
+  }
+}
