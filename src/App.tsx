@@ -17,6 +17,7 @@ import {
   WifiOff,
 } from 'lucide-react';
 import {Nav} from './components/Nav';
+import {Buddy} from './components/Buddy';
 import {PhoneFrame, ChatMockup, VoiceMockup} from './components/Phone';
 import {Reveal} from './components/Reveal';
 import logo from './assets/poketpals.webp';
@@ -29,9 +30,9 @@ const TERMS_URL = `${REPO_URL}/blob/main/docs/legal/terms-of-service.md`;
 const NOTICES_URL = `${REPO_URL}/blob/main/docs/legal/open-source-notices.md`;
 
 const primaryButton =
-  'inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-cream shadow-[0_12px_30px_-14px_rgba(34,31,26,0.65)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-ink-soft active:translate-y-0';
+  'inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-cream shadow-[0_12px_30px_-14px_rgba(34,31,26,0.65)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-ink-soft active:translate-y-0 sm:w-auto';
 const secondaryButton =
-  'inline-flex items-center justify-center gap-2 rounded-full border border-line bg-cream/80 px-6 py-3.5 text-sm font-semibold text-ink transition-all duration-200 hover:-translate-y-0.5 hover:border-ink/20 hover:bg-cream active:translate-y-0';
+  'inline-flex w-full items-center justify-center gap-2 rounded-full border border-line bg-cream/80 px-6 py-3.5 text-sm font-semibold text-ink transition-all duration-200 hover:-translate-y-0.5 hover:border-ink/20 hover:bg-cream active:translate-y-0 sm:w-auto';
 
 function Star({
   className,
@@ -275,16 +276,16 @@ function Voice() {
       <div className="container-page">
         <Reveal>
           <div className="overflow-hidden rounded-[2.25rem] border border-line bg-cream sm:rounded-[2.75rem]">
-            <div className="grid items-center gap-10 p-5 sm:p-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 lg:p-12">
-              <div className="relative flex justify-center rounded-[1.75rem] bg-sky-soft/70 px-5 py-8 sm:px-8 lg:py-10">
-                <div className="relative w-full max-w-[282px]">
+            <div className="grid items-center gap-8 p-4 sm:gap-10 sm:p-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 lg:p-12">
+              <div className="relative order-2 flex min-w-0 justify-center overflow-hidden rounded-[1.75rem] bg-sky-soft/70 px-4 py-6 sm:px-8 sm:py-8 lg:order-none lg:py-10">
+                <div className="relative w-full min-w-0 max-w-[240px] sm:max-w-[282px]">
                   <PhoneFrame>
                     <VoiceMockup />
                   </PhoneFrame>
                 </div>
               </div>
 
-              <div className="max-w-xl lg:py-4">
+              <div className="order-1 max-w-xl min-w-0 lg:order-none lg:py-4">
                 <Eyebrow>Hands-free voice</Eyebrow>
                 <h2 className="mt-3 text-[clamp(1.9rem,3.5vw,2.9rem)] font-semibold leading-[1.08] tracking-[-0.025em]">
                   Tap the waveform. Start talking.
@@ -674,6 +675,7 @@ export default function App() {
         <DownloadSection />
       </main>
       <Footer />
+      <Buddy />
     </div>
   );
 }
